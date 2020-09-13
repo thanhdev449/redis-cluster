@@ -1,0 +1,57 @@
+version: '3'
+services:
+  redis_server:
+    image: "redis"
+    # network_mode: "host"
+    ports:
+      - "6379:6379"
+  node1:
+    build:
+      context: ./dockerfile
+      dockerfile: node1_Dockerfile
+    volumes:
+      - '${NODE1_DOC_ROOT}:/src/redis'
+      - './redis/redis-config-1:/src/redis/redis-config'
+      - "${NODE2_DOC_ROOT}:/src/redis-2"
+      - './redis/redis-config-2:/src/redis-2/redis-config'
+      - '${NODE3_DOC_ROOT}:/src/redis-3'
+      - './redis/redis-config-3:/src/redis-3/redis-config'
+      - "${NODE4_DOC_ROOT}:/src/redis-4"
+      - './redis/redis-config-4:/src/redis-4/redis-config'
+      - '${NODE5_DOC_ROOT}:/src/redis-5'
+      - './redis/redis-config-5:/src/redis-5/redis-config'
+      - "${NODE6_DOC_ROOT}:/src/redis-6"
+      - './redis/redis-config-6:/src/redis-6/redis-config'
+    ports:
+      - '6001:6001'
+      - '6002:6002'
+      - '6003:6003'
+      - '6004:6004'
+      - '6005:6005'
+      - '6006:6006'
+    depends_on: 
+      - redis_server
+# version: '3'
+
+# services:
+#   redis-master:
+#     image: 'bitnami/redis:latest'
+#     ports:
+#       - '6379'
+#     environment:
+#       - REDIS_REPLICATION_MODE=master
+#       - REDIS_PASSWORD=my_master_password
+#     volumes:
+#       - '/path/to/redis-persistence:/bitnami'
+#   redis-replica:
+#     image: 'bitnami/redis:latest'
+#     ports:
+#       - '6379'
+#     depends_on:
+#       - redis-master
+#     environment:
+#       - REDIS_REPLICATION_MODE=slave
+#       - REDIS_MASTER_HOST=redis-master
+#       - REDIS_MASTER_PORT_NUMBER=6379
+#       - REDIS_MASTER_PASSWORD=my_master_password
+#       - REDIS_PASSWORD=my_replica_password

@@ -1,0 +1,25 @@
+FROM redis:latest
+
+MAINTAINER thanh.nguyen
+
+RUN mkdir /src
+
+RUN mkdir /src/redis
+RUN mkdir /src/redis/redis-config
+
+RUN mkdir /src/redis-2
+RUN mkdir /src/redis-2/redis-config
+
+RUN mkdir /src/redis-3
+RUN mkdir /src/redis-3/redis-config
+
+RUN mkdir /src/redis-4
+RUN mkdir /src/redis-4/redis-config
+
+RUN mkdir /src/redis-5
+RUN mkdir /src/redis-5/redis-config
+
+RUN mkdir /src/redis-6
+RUN mkdir /src/redis-6/redis-config
+
+WORKDIR /src
