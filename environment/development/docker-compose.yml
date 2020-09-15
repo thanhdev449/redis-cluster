@@ -1,36 +1,69 @@
 version: '3'
 services:
-  redis_server:
-    image: "redis"
-    # network_mode: "host"
-    ports:
-      - "6379:6379"
-  node1:
+  # redis_server:
+  #   image: "redis"
+  #   ports:
+  #     - "6379:6379"
+  server_6001:
     build:
       context: ./dockerfile
       dockerfile: node1_Dockerfile
     volumes:
-      - '${NODE1_DOC_ROOT}:/src/redis'
       - './redis/redis-config-1:/src/redis/redis-config'
-      - "${NODE2_DOC_ROOT}:/src/redis-2"
+    ports:
+      - '6001'
+    # command:
+    #   "redis-server /redis.conf"
+  server_6002:
+    build:
+      context: ./dockerfile
+      dockerfile: node2_Dockerfile
+    volumes:
       - './redis/redis-config-2:/src/redis-2/redis-config'
-      - '${NODE3_DOC_ROOT}:/src/redis-3'
+    ports:
+      - '6002'
+    # command:
+    #   "./redis/redis-config-2/cmd.sh"
+  server_6003:
+    build:
+      context: ./dockerfile
+      dockerfile: node3_Dockerfile
+    volumes:
       - './redis/redis-config-3:/src/redis-3/redis-config'
-      - "${NODE4_DOC_ROOT}:/src/redis-4"
+    ports:
+      - '6003'
+    # command:
+    #   "./redis/redis-config-3/cmd.sh"
+  server_6004:
+    build:
+      context: ./dockerfile
+      dockerfile: node4_Dockerfile
+    volumes:
       - './redis/redis-config-4:/src/redis-4/redis-config'
-      - '${NODE5_DOC_ROOT}:/src/redis-5'
+    ports:
+      - '6004'
+    # command:
+    #   "./redis/redis-config-4/cmd.sh"
+  server_6005:
+    build:
+      context: ./dockerfile
+      dockerfile: node5_Dockerfile
+    volumes:
       - './redis/redis-config-5:/src/redis-5/redis-config'
-      - "${NODE6_DOC_ROOT}:/src/redis-6"
+    ports:
+      - '6005'
+    # command:
+    #   "./redis/redis-config-5/cmd.sh"
+  server_6006:
+    build:
+      context: ./dockerfile
+      dockerfile: node6_Dockerfile
+    volumes:
       - './redis/redis-config-6:/src/redis-6/redis-config'
     ports:
-      - '6001:6001'
-      - '6002:6002'
-      - '6003:6003'
-      - '6004:6004'
-      - '6005:6005'
-      - '6006:6006'
-    depends_on: 
-      - redis_server
+      - '6006'
+    # command:
+    #   "./redis/redis-config-6/cmd.sh"
 # version: '3'
 
 # services:

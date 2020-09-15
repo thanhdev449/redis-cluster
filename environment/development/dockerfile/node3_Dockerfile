@@ -2,7 +2,8 @@ FROM redis:latest
 
 MAINTAINER thanh.nguyen
 
-RUN mkdir /src-redis-3
-RUN mkdir /src-redis-3/redis-config
+RUN mkdir /src
+RUN mkdir /src/redis-3
+RUN mkdir /src/redis-3/redis-config
 
-WORKDIR /src-redis-3
+WORKDIR /src/redis-3
