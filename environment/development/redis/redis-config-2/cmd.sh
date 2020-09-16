@@ -1,2 +1,2 @@
-cd /src/redis-2
-redis-server redis-confif/redis.conf
+
+redis-server redis-2/redis-config/redis.conf

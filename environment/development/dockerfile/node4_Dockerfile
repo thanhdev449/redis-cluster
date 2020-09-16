@@ -5,4 +5,4 @@ RUN mkdir /src
 RUN mkdir /src/redis-4
 RUN mkdir /src/redis-4/redis-config
 
-WORKDIR /src/redis-4
+WORKDIR /src

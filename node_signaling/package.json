@@ -1,0 +1,19 @@
+{
+  "name": "node_signaling",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --inspect server.js"
+  },
+  "author": "thanh.nguyen",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ioredis": "^4.17.3",
+    "nodemon": "^2.0.4",
+    "redis": "^3.0.2",
+    "redis-clustr": "^1.7.0"
+  }
+}

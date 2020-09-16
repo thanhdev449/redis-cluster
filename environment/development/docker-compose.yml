@@ -11,9 +11,10 @@ services:
     volumes:
       - './redis/redis-config-1:/src/redis/redis-config'
     ports:
-      - '6001'
-    # command:
-    #   "redis-server /redis.conf"
+      - '6001:6001'
+      - '16001:16001'
+    command:
+      "./redis/redis-config/cmd.sh"
   server_6002:
     build:
       context: ./dockerfile
@@ -21,9 +22,10 @@ services:
     volumes:
       - './redis/redis-config-2:/src/redis-2/redis-config'
     ports:
-      - '6002'
-    # command:
-    #   "./redis/redis-config-2/cmd.sh"
+      - '6002:6002'
+      - '16002:16002'
+    command:
+      "./redis-2/redis-config/cmd.sh"
   server_6003:
     build:
       context: ./dockerfile
@@ -31,9 +33,10 @@ services:
     volumes:
       - './redis/redis-config-3:/src/redis-3/redis-config'
     ports:
-      - '6003'
-    # command:
-    #   "./redis/redis-config-3/cmd.sh"
+      - '6003:6003'
+      - '16003:16003'
+    command:
+      "./redis-3/redis-config/cmd.sh"
   server_6004:
     build:
       context: ./dockerfile
@@ -41,9 +44,10 @@ services:
     volumes:
       - './redis/redis-config-4:/src/redis-4/redis-config'
     ports:
-      - '6004'
-    # command:
-    #   "./redis/redis-config-4/cmd.sh"
+      - '6004:6004'
+      - '16004:16004'
+    command:
+      "./redis-4/redis-config/cmd.sh"
   server_6005:
     build:
       context: ./dockerfile
@@ -51,9 +55,10 @@ services:
     volumes:
       - './redis/redis-config-5:/src/redis-5/redis-config'
     ports:
-      - '6005'
-    # command:
-    #   "./redis/redis-config-5/cmd.sh"
+      - '6005:6005'
+      - '16005:16005'
+    command:
+      "./redis-5/redis-config/cmd.sh"
   server_6006:
     build:
       context: ./dockerfile
@@ -61,9 +66,10 @@ services:
     volumes:
       - './redis/redis-config-6:/src/redis-6/redis-config'
     ports:
-      - '6006'
-    # command:
-    #   "./redis/redis-config-6/cmd.sh"
+      - '6006:6006'
+      - '16006:16006'
+    command:
+      "./redis-6/redis-config/cmd.sh"
 # version: '3'
 
 # services:
