@@ -14,36 +14,6 @@ function initializeRedis(ip, port, password) {
         port: 6001,
         db: '0',
       },
-      // {
-      //   host: '172.18.0.1',
-      //   port: 6002,
-      //   db: '0',
-      //   password: ""
-      // },
-      // {
-      //   host: '172.18.0.1',
-      //   port: 6003,
-      //   db: '0',
-      //   password: ""
-      // },
-      // {
-      //   host: '172.18.0.1',
-      //   port: 6004,
-      //   db: '0',
-      //   password: ""
-      // },
-      // {
-      //   host: '172.18.0.1',
-      //   port: 6005,
-      //   db: '0',
-      //   password: ""
-      // },
-      // {
-      //   host: '172.18.0.1',
-      //   port: 6006,
-      //   db: '0',
-      //   password: ""
-      // },
     ],
     // slotInterval: 1000, 
     // maxQueueLength: 100, 
@@ -56,7 +26,6 @@ function initializeRedis(ip, port, password) {
       //_client = require('redis').createClient("redis://" + "" + ":" + "" + "@" +  host + ":" + port,options);
       return redis.createClient(port, "192.168.64.77", options);
       //return redis.createClient("redis://" + "" + ":" + "" + "@" +  host + ":" + port,options);
-      //return redis.createClient("redis://" + "" + ":" + "" + "@" +  "172.18.0.1" + ":" + "6003");
     }
   });
 }

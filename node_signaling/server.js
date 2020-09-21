@@ -12,11 +12,11 @@ _redis.initializeRedis(_enviroment.configuration.REDIS_SERVER_1.host,_enviroment
 webServer = httpServer.createServer(app);
 
 app.use('/users', function(){
-    _redis.setSimple("thanh80","899");
+    _redis.setSimple("thanh92","900");
 });
 
 app.use('/get-users', function(){
-    _redis.getSimple("thanh80");
+    _redis.getSimple("thanh92");
 });
 
 webServer.listen(_enviroment.configuration.PORT,function(){

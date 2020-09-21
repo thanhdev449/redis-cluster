@@ -94,3 +94,4 @@ services:
 #       - REDIS_MASTER_PORT_NUMBER=6379
 #       - REDIS_MASTER_PASSWORD=my_master_password
 #       - REDIS_PASSWORD=my_replica_password
+
