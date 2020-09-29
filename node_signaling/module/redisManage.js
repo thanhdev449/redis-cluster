@@ -12,18 +12,19 @@ function initializeRedis(ip, port, password) {
       {
         host: '192.168.64.77',
         port: 6001,
-        db: '0',
+        db: '0', 
       },
     ],
-    // slotInterval: 1000, 
-    // maxQueueLength: 100, 
-    // queueShift: false,
-    // wait: 5000,
+    slotInterval: 1000, 
+    maxQueueLength: 100, 
+    queueShift: false,
+    wait: 5000,
     slaves: 'share',
     createClient: function(port,host,options) {
       console.log(port,host);
       //return require('redis').createClient(port, host, options);
-      //_client = require('redis').createClient("redis://" + "" + ":" + "" + "@" +  host + ":" + port,options);
+      //return require('redis').createClient("redis://" + "" + ":" + "" + "@" +  host + ":" + port,options);
+      //return require('redis').createClient("redis://"  +  host + ":" + port,options);
       return redis.createClient(port, "192.168.64.77", options);
       //return redis.createClient("redis://" + "" + ":" + "" + "@" +  host + ":" + port,options);
     }
