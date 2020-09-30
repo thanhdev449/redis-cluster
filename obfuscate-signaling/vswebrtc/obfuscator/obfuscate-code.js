@@ -1,12 +1,18 @@
 const fs = require('fs');
 const path = require('path');
 const JavaScriptObfuscator  = require('javascript-obfuscator');
-let arr_path = ['module'] ;
-let arr_filename = [];
-let tmp_str = ''
+var arr_path = ['module','object','util'] ;
+var arr_filename = [];
+var _pathFile = "";
 
 function handleObfuscation(){
+    clearFileMin();
     readAllFile();
+}
+
+function clearFileMin(){
+    _pathFile = configPath('public/vswebrtc-server.min.js');
+    fs.writeFileSync(_pathFile,'')
 }
 
 function readAllFile(){
@@ -15,18 +21,16 @@ function readAllFile(){
         countFilesInFolder(path_tmp)
     });
     handleFile(arr_filename);
-    //console.log(arr_filename);
 }
 
 function countFilesInFolder(path_tmp) {
-    let arr_file_tmp = []
     fs.readdirSync(path_tmp).forEach((file) => {
         if(checkFileInFolder(file)){
             arr_filename.push(path.join(path_tmp, "/" + file));
         }else{
             fs.readdirSync(path.join(path_tmp, "/" + file)).forEach((file2) => {
                 if (checkFileInFolder(file2)) {
-                    arr_filename.push(path.join(path_tmp, "/" + file2));
+                    arr_filename.push(path.join(path_tmp, "/" + file + "/" + file2));
                 }else{
                     fs.readdirSync(path.join(path_tmp, "/" + file + "/" + file2)).forEach((file3) => {
                         if (checkFileInFolder(file3)) {
@@ -37,28 +41,19 @@ function countFilesInFolder(path_tmp) {
             });
         }
     });
-    //return arr_file_tmp;
-}
-
-function readFile(pathFull){
-    return new Promise((resolve,reject) => {
-        fs.readFile(pathFull,"UTF-8",function(err,data){
-            if (err) reject(err);
-            resolve(data);
-        })
-    })
 }
 
 function handleFile(arr_filename){
-    let data_tmp = '';
    for (let i = 0; i < arr_filename.length; i++) {
-       const item = arr_filename[i];
-       readFile(item)
-       .then(res =>    console.log(res))
-       .catch(err => console.log(err))
-       //console.log(data_tmp);
+    const item = arr_filename[i];
+    console.log(item)
+    let str_code =  fs.readFileSync(item,"UTF-8");
+    str_code += "\n";
+    let dataConvert = JavaScriptObfuscator.obfuscate(str_code.toString());
+    let str_code_tmp = fs.readFileSync(_pathFile,"UTF-8");
+    str_code_tmp += dataConvert.getObfuscatedCode();
+    fs.writeFileSync(_pathFile,str_code_tmp)
    }
-  
 }
 
 function configPath(subPath){
@@ -74,3 +69,4 @@ function checkFileInFolder(file){
 }
 
 exports.handleObfuscation = handleObfuscation;
+exports.clearFileMin = clearFileMin;

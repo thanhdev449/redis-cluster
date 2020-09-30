@@ -9,11 +9,6 @@ module.exports.registerToSaleCallList = function (req, res, next) {
                 message: "Visitor code can not be empty"
             });
         }
-        if(!req.body.vip) {
-            return res.status(400).send({
-                message: "Vip can not be empty"
-            });
-        }
         if(!req.body.room_id) {
             return res.status(400).send({
                 message: "Room id can not be empty"
@@ -22,7 +17,6 @@ module.exports.registerToSaleCallList = function (req, res, next) {
         
         // Create a Room for Sale
         const sale = new Sale({
-            vip: req.body.vip, 
             visitor_code: req.body.visitor_code, 
             room_id: req.body.room_id,
             status: 1,
@@ -61,7 +55,7 @@ module.exports.getCallListBySale = function (req, res, next) {
 module.exports.updateStatus = function (req, res, next) {
     try {
         // Validate request
-        if (req.query.id == null) {
+        if (req.query.room_id == null) {
             return res.status(400).send({
                 message: "Id invalid"
             });
@@ -80,7 +74,7 @@ module.exports.updateStatus = function (req, res, next) {
         if(req.body.status == 4){
             data.call_end = new Date();
         }
-        Sale.updateOne({_id: req.query.id}, data).then(data => {
+        Sale.updateOne({room_id: req.query.room_id}, data).then(data => {
             res.send(data);
         }).catch(err => {
             res.status(500).send({

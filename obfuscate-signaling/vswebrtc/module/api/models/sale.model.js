@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const SaleSchema = mongoose.Schema({
-    vip: String,
     visitor_code: String,
     room_id: String,
     status: Number,

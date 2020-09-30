@@ -6,7 +6,7 @@ var _client;
 
 function initializeRedis(ip, port) {
   _client = redis.createClient(
-    "redis://" + "" + ":" + "" + "@" + ip + ":" + port
+    "redis://" + ip + ":" + port
   );
 }
 

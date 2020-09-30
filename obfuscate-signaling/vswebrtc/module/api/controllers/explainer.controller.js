@@ -9,11 +9,6 @@ module.exports.registerToExplainerCallList = async function (req, res, next) {
                 message: "Visitor code can not be empty"
             });
         }
-        if(!req.body.vip) {
-            return res.status(400).send({
-                message: "Vip can not be empty"
-            });
-        }
         if(!req.body.room_id) {
             return res.status(400).send({
                 message: "Room id can not be empty"
@@ -25,7 +20,6 @@ module.exports.registerToExplainerCallList = async function (req, res, next) {
         }else{
             // Create a Room for Explainer
             const explainer = new Explainer({
-                vip: req.body.vip, 
                 visitor_code: req.body.visitor_code, 
                 room_id: req.body.room_id,
                 status: 1,
@@ -53,7 +47,7 @@ module.exports.registerToExplainerCallList = async function (req, res, next) {
 
 module.exports.getCallListByExplainer = function (req, res, next) {
     try {
-        Explainer.find().then(data=>{
+        Explainer.find().sort({createdAt:-1}).then(data=>{
             return res.send(data);
         });
     } catch (error) {
@@ -66,9 +60,9 @@ module.exports.getCallListByExplainer = function (req, res, next) {
 module.exports.updateStatus = function (req, res, next) {
     try {
         // Validate request
-        if (req.query.id == null) {
+        if (req.query.room_id == null) {
             return res.status(400).send({
-                message: "Id invalid"
+                message: "Room id invalid"
             });
         }
         if (isNaN(req.body.status)) {
@@ -85,7 +79,7 @@ module.exports.updateStatus = function (req, res, next) {
         if(req.body.status == 4){
             data.call_end = new Date();
         }
-        Explainer.updateOne({_id: req.query.id}, data).then(data => {
+        Explainer.updateOne({room_id: req.query.room_id}, data).then(data => {
             res.send(data);
         }).catch(err => {
             res.status(500).send({
